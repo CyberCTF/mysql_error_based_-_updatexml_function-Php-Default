@@ -1,0 +1,14 @@
+{
+  "name": "php-site",
+  "version": "1.0.0",
+  "description": "Une template PHP moderne avec plus de 30 composants UI inspirés de shadcn/ui.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.12"
+  }
+}

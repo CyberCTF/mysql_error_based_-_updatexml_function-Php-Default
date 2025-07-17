@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  php-app:
+    image: php:8.2-apache
+    ports:
+      - "8000:80"
+    volumes:
+      - ../build:/var/www/html
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    restart: unless-stopped
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: cyberctf
+      MYSQL_USER: cyberctf
+      MYSQL_PASSWORD: cyberctf123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: cyberctf
+      PMA_PASSWORD: cyberctf123
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_data: 
