@@ -1,44 +1,69 @@
 {
+  "lab_name": "mysql-updatexml-injection",
+  "lab_title": "MySQL Error-Based SQL Injection via UpdateXML",
+  "lab_description": "Learn to exploit MySQL error-based SQL injection using the UpdateXML function to extract critical database information for further compromise.",
+  "lab_difficulty": "Intermediate",
+  "lab_estimated_time": "30-45 minutes",
+  "lab_objectives": [
+    "Identify a SQL injection vulnerability",
+    "Craft a payload using the UpdateXML function",
+    "Extract the database name using error-based SQL injection",
+    "Extract the database user similarly"
+  ],
+  "lab_prerequisites": [
+    "Basic SQL syntax",
+    "Understanding of SQL injection",
+    "Familiarity with MySQL functions",
+    "Using web proxies like Burp Suite"
+  ],
+  "lab_skills_learned": [
+    "Identifying error-based SQL injection points",
+    "Manipulating MySQL error output with UpdateXML",
+    "Extracting information from error messages"
+  ],
+  "lab_quick_start": {
+    "prerequisites": "Docker and Docker Compose installed locally.",
+    "installation": "Clone the repo, then run: docker-compose up --build. Visit http://localhost:3206 and start testing the /search.php endpoint."
+  },
+  "lab_issue_tracker_url": "https://github.com/ctf-labs/mysql-updatexml-injection/issues",
   "site": {
-    "name": "Ecommerce",
-    "description": "A Capture The Flag platform for security challenges",
-    "logo": "/logo.svg",
-    "copyright": "2025 Cyber CTF"
+    "name": "QuickPay",
+    "description": "Instant online payments for modern businesses. Secure, fast, and reliable payment processing.",
+    "logo": "/assets/img/logo.svg",
+    "copyright": "2025 QuickPay Inc."
   },
   "navigation": {
     "main": [
-      { "link": "/", "title": "Home" }
+      {"link": "/", "title": "Home"},
+      {"link": "/search.php", "title": "Transaction Search"},
+      {"link": "/dashboard.php", "title": "Dashboard"}
     ],
     "auth": [
-      { "link": "/login", "title": "Login" },
-      { "link": "/register", "title": "Register" }
+      {"link": "/login.php", "title": "Login"},
+      {"link": "/register.php", "title": "Register"}
     ]
   },
   "footer": {
     "links": [
-      { "link": "/", "title": "Home" }
+      {"link": "/", "title": "Home"},
+      {"link": "/search.php", "title": "Search"},
+      {"link": "/dashboard.php", "title": "Dashboard"}
     ],
     "social": [
       {
         "name": "Website",
-        "href": "https://www.cyberctf.fr",
+        "href": "https://www.quickpay.com",
         "icon": "website"
       },
       {
         "name": "GitHub",
-        "href": "https://github.com/cyberctf",
+        "href": "https://github.com/quickpay",
         "icon": "github"
       }
     ]
   },
-  "challenge": {
-    "title": "Database Security Challenge",
-    "description": "Find and exploit the SQL injection vulnerability in the login form. Use your knowledge of database security to bypass authentication.",
-    "skills": ["SQL", "Security", "Web", "Authentication"],
-    "points": 160
-  },
   "cta": {
-    "label": "Start the lab",
-    "link": "/lab"
+    "label": "Search Transactions",
+    "link": "/search.php"
   }
 } 

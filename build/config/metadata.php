@@ -20,46 +20,44 @@ class Metadata {
                 // Métadonnées par défaut si le fichier n'existe pas
                 self::$metadata = [
                     'site' => [
-                        'name' => 'CyberCTF Library',
-                        'description' => 'A Capture The Flag platform for security challenges',
+                        'name' => 'QuickPay',
+                        'description' => 'Instant online payments for modern businesses. Secure, fast, and reliable payment processing.',
                         'logo' => '/assets/img/logo.svg',
-                        'copyright' => '2025 Cyber CTF'
+                        'copyright' => '2025 QuickPay Inc.'
                     ],
                     'navigation' => [
                         'main' => [
-                            ['link' => '/', 'title' => 'Home']
+                            ['link' => '/', 'title' => 'Home'],
+                            ['link' => '/search.php', 'title' => 'Transaction Search'],
+                            ['link' => '/dashboard.php', 'title' => 'Dashboard']
                         ],
                         'auth' => [
-                            ['link' => '/login', 'title' => 'Login'],
-                            ['link' => '/register', 'title' => 'Register']
+                            ['link' => '/login.php', 'title' => 'Login'],
+                            ['link' => '/register.php', 'title' => 'Register']
                         ]
                     ],
                     'footer' => [
                         'links' => [
-                            ['link' => '/', 'title' => 'Home']
+                            ['link' => '/', 'title' => 'Home'],
+                            ['link' => '/search.php', 'title' => 'Search'],
+                            ['link' => '/dashboard.php', 'title' => 'Dashboard']
                         ],
                         'social' => [
                             [
                                 'name' => 'Website',
-                                'href' => 'https://www.cyberctf.fr',
+                                'href' => 'https://www.quickpay.com',
                                 'icon' => 'website'
                             ],
                             [
                                 'name' => 'GitHub',
-                                'href' => 'https://github.com/cyberctf',
+                                'href' => 'https://github.com/quickpay',
                                 'icon' => 'github'
                             ]
                         ]
                     ],
-                    'challenge' => [
-                        'title' => 'Database Security Challenge',
-                        'description' => 'Find and exploit the SQL injection vulnerability in the login form. Use your knowledge of database security to bypass authentication.',
-                        'skills' => ['SQL', 'Security', 'Web', 'Authentication'],
-                        'points' => 160
-                    ],
                     'cta' => [
-                        'label' => 'Start the lab',
-                        'link' => '/lab'
+                        'label' => 'Search Transactions',
+                        'link' => '/search.php'
                     ]
                 ];
             }

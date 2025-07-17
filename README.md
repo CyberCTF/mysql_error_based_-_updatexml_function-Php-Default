@@ -1,166 +1,87 @@
-# PHP Template - CyberCTF Library
+# MySQL Error-Based SQL Injection via UpdateXML
 
-Un template PHP moderne inspiré de Next.js avec des composants UI inspirés de shadcn/ui.
+Learn to exploit MySQL error-based SQL injection using the UpdateXML function to extract critical database information for further compromise.
 
-## 🚀 Fonctionnalités
+## Description
 
-- **Design moderne** : Interface inspirée de Next.js avec des composants UI élégants
-- **Système de composants** : Architecture modulaire avec 30+ composants UI
-- **Responsive** : Design adaptatif pour tous les appareils
-- **Performance** : Code optimisé et léger
-- **Accessibilité** : Composants conformes aux standards WCAG
-- **Métadonnées dynamiques** : Configuration via fichier JSON
+This lab demonstrates a vulnerable fintech payment processing application called QuickPay. The application contains a search functionality that is vulnerable to SQL injection through the UpdateXML function, allowing attackers to extract sensitive database information through error messages.
 
-## 📁 Structure du projet
+## Objectives
+
+- Identify a SQL injection vulnerability
+- Craft a payload using the UpdateXML function
+- Extract the database name using error-based SQL injection
+- Extract the database user similarly
+
+## Difficulty
+
+Intermediate
+
+## Estimated Time
+
+30-45 minutes
+
+## Prerequisites
+
+- Basic SQL syntax
+- Understanding of SQL injection
+- Familiarity with MySQL functions
+- Using web proxies like Burp Suite
+
+## Skills Learned
+
+- Identifying error-based SQL injection points
+- Manipulating MySQL error output with UpdateXML
+- Extracting information from error messages
+
+## Project Structure
 
 ```
-php-site/
-├── build/              # Site web (index.php, components, assets, etc.)
-├── deploy/             # Configuration Docker et métadonnées
-│   ├── docker-compose.yaml
-│   ├── docker-compose.dev.yaml
-│   └── metadata.json
-├── docs/               # Documentation
-├── test/               # Tests
-└── README.md           # Ce fichier
+├── build/           # Application source code
+├── deploy/          # Docker configuration
+├── test/            # Automated tests
+├── docs/            # Documentation
+├── README.md        # This file
+└── .gitignore
 ```
 
-## 🛠️ Installation et lancement
+## Quick Start
 
-### Option 1 : Avec Docker (Recommandé)
+### Prerequisites
 
-1. **Lancer avec Docker Compose**
-```bash
-cd php-site/deploy
-docker-compose up -d
-```
+Docker and Docker Compose installed locally.
 
-2. **Accéder au site**
-- Site principal : http://localhost:8000
-- phpMyAdmin : http://localhost:8080
+### Installation
 
-3. **Arrêter les services**
-```bash
-docker-compose down
-```
+1. Clone the repository
+2. Navigate to the project directory
+3. Run the application:
+   ```bash
+   docker-compose up --build
+   ```
+4. Visit http://localhost:3206 and start testing the /search.php endpoint
 
-### Option 2 : Mode développement
+## How to Use
 
-```bash
-cd php-site/deploy
-docker-compose -f docker-compose.dev.yaml up -d
-```
+1. Access the QuickPay application at http://localhost:3206
+2. Navigate to the "Transaction Search" page
+3. Test the search functionality for SQL injection vulnerabilities
+4. Use the UpdateXML function to extract database information
 
-### Option 3 : Serveur PHP local
+## Vulnerability Details
 
-```bash
-cd php-site/build
-php -S localhost:8000
-```
+The search functionality in `/search.php` is vulnerable to SQL injection due to improper input sanitization. The application directly concatenates user input into SQL queries without proper parameterization, allowing malicious SQL code to be executed.
 
-## 🔧 Configuration
+## Testing Payloads
 
-### Métadonnées du site
+- Basic SQL injection test: `' OR '1'='1`
+- Database name extraction: `1' and UpdateXML(1,concat(0x7e,(select database()),0x7e),1)-- -`
+- Database user extraction: `1' and UpdateXML(1,concat(0x7e,(select user()),0x7e),1)-- -`
 
-Modifiez le fichier `deploy/metadata.json` pour personnaliser :
-- Nom et description du site
-- Navigation
-- Liens du footer
-- Informations du challenge CTF
+## Issue Tracker
 
-### Variables d'environnement Docker
+Report issues at: https://github.com/ctf-labs/mysql-updatexml-injection/issues
 
-- **Port du site** : 8000
-- **Port MySQL** : 3306
-- **Port phpMyAdmin** : 8080
-- **Base de données** : cyberctf
-- **Utilisateur** : cyberctf
-- **Mot de passe** : cyberctf123
+## Disclaimer
 
-## 🎨 Composants disponibles
-
-### Composants de base
-- **Button** : Boutons avec variantes et états
-- **Card** : Conteneurs avec ombres et bordures
-- **Input** : Champs de saisie stylisés
-- **Badge** : Étiquettes et badges
-
-### Composants avancés
-- **Alert** : Messages d'alerte
-- **Dialog** : Modales et dialogues
-- **Tabs** : Navigation par onglets
-- **Table** : Tableaux de données
-- **Progress** : Barres de progression
-- **Skeleton** : Placeholders de chargement
-
-### Composants spécialisés
-- **ChallengeToast** : Notifications pour les défis CTF
-- **Avatar** : Images de profil
-- **Breadcrumb** : Navigation hiérarchique
-
-## 📝 Utilisation
-
-### Inclure un composant
-```php
-<?php include 'components/ui/Button.php'; ?>
-<?php echo Button::render('Cliquer ici', ['variant' => 'primary']); ?>
-```
-
-### Utiliser les métadonnées
-```php
-<?php
-require_once 'config/metadata.php';
-$siteName = Metadata::get('site.name');
-$challengeTitle = Metadata::get('challenge.title');
-?>
-```
-
-## 🧪 Tests
-
-### Lancer les tests
-```bash
-cd php-site/build
-npm test
-```
-
-## 📚 Documentation
-
-Consultez le dossier `docs/` pour :
-- Guide d'utilisation des composants
-- Configuration avancée
-- Bonnes pratiques
-- Exemples d'implémentation
-
-## 🚀 Déploiement
-
-### Déploiement en production
-1. Modifiez `deploy/docker-compose.yaml` pour la production
-2. Configurez les variables d'environnement
-3. Déployez avec `docker-compose up -d`
-
-### Déploiement simple
-1. Uploadez le contenu du dossier `build/` sur votre serveur
-2. Configurez votre serveur web pour pointer vers `index.php`
-3. Vérifiez les permissions des dossiers
-
-## 🤝 Contribution
-
-1. Fork le projet
-2. Créez une branche pour votre fonctionnalité
-3. Committez vos changements
-4. Poussez vers la branche
-5. Ouvrez une Pull Request
-
-## 📄 Licence
-
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
-
-## 🆘 Support
-
-- **Documentation** : Consultez le dossier `docs/`
-- **Issues** : Ouvrez une issue sur GitHub
-- **Discussions** : Utilisez les discussions GitHub
-
----
-
-**Développé avec ❤️ pour la communauté CyberCTF** 
+This is a deliberately vulnerable lab designed solely for educational purposes. Do not use these techniques on systems you do not own or have explicit permission to test. 

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce</title>
+    <title>QuickPay - Instant Online Payments</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -58,20 +58,13 @@
             background-repeat: repeat;
         }
         
-        /* Mode clair */
-        body:not(.dark) .rectangles::before {
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='40' x='0' y='0' stroke='rgba(0,0,0,0.1)' fill='none' /%3E%3C/svg%3E");
-        }
-        
-        /* Mode sombre */
-        .dark .rectangles::before {
+        /* Mode sombre uniquement */
+        .rectangles::before {
             background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='40' x='0' y='0' stroke='rgba(255,255,255,0.15)' fill='none' /%3E%3C/svg%3E");
         }
-        
-        /* Animation supprimée pour éviter le mouvement agaçant */
     </style>
 </head>
-<body class="bg-white dark:bg-black dark">
+<body class="bg-black dark">
     <?php
     // Charger le système de composants
     require_once __DIR__ . '/components/ComponentLoader.php';
@@ -97,8 +90,8 @@
             <div class="flex flex-row gap-2 items-center z-10">
                 <!-- Logo -->
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                        <span class="text-black text-lg font-bold">🎯</span>
+                    <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white text-lg font-bold">💳</span>
                     </div>
                     <span class="text-xl font-bold text-white"><?php echo htmlspecialchars($site['name']); ?></span>
                 </div>
@@ -127,7 +120,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <div class="flex h-screen flex-col items-center justify-center border-b border-neutral-100 dark:border-neutral-800">
+    <div class="flex h-screen flex-col items-center justify-center border-b border-neutral-800">
         <!-- Background avec rectangles SVG 3D -->
         <div class="hero-background">
             <div class="rectangles top"></div>
@@ -136,25 +129,50 @@
         
         <!-- Contenu principal -->
         <div class="relative z-10">
-            <h1 class="text-balance mx-auto max-w-2xl text-center text-3xl font-bold text-black dark:text-white md:text-5xl">
+            <h1 class="text-balance mx-auto max-w-2xl text-center text-3xl font-bold text-white md:text-5xl">
                 <?php echo htmlspecialchars($site['name']); ?>
             </h1>
-            <p class="text-balance mx-auto mt-4 max-w-2xl text-center text-base text-neutral-800 dark:text-neutral-200">
+            <p class="text-balance mx-auto mt-4 max-w-2xl text-center text-base text-neutral-200">
                 <?php echo htmlspecialchars($site['description']); ?>
             </p>
             <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <?php 
-                echo $loader->render('Button', [
-                    'variant' => 'outline',
-                    'className' => 'w-40 rounded-lg px-4 py-2 text-sm text-center bg-white text-black border border-neutral-200 shadow hover:bg-neutral-100 transition-colors dark:bg-black dark:text-white dark:border-neutral-800 dark:hover:bg-neutral-900'
-                ], htmlspecialchars($cta['label']));
-                ?>
+                <a href="<?php echo htmlspecialchars($cta['link']); ?>" 
+                   class="w-40 rounded-lg px-4 py-2 text-sm text-center bg-green-600 text-white border border-green-600 shadow hover:bg-green-700 transition-colors">
+                    <?php echo htmlspecialchars($cta['label']); ?>
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Challenge Toast -->
-    <?php echo $loader->render('ChallengeToast', ['expanded' => false]); ?>
+    <!-- Features Section -->
+    <div class="py-20 px-8">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">Why Choose QuickPay?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
+                    <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">⚡</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Instant Processing</h3>
+                    <p class="text-neutral-300">Lightning-fast payment processing with real-time confirmations.</p>
+                </div>
+                <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
+                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">🔒</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Secure Transactions</h3>
+                    <p class="text-neutral-300">Bank-level security with end-to-end encryption for all transactions.</p>
+                </div>
+                <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
+                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Advanced Analytics</h3>
+                    <p class="text-neutral-300">Comprehensive reporting and analytics for your business insights.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <div class="relative">
@@ -162,7 +180,9 @@
             <div class="max-w-7xl mx-auto text-sm text-neutral-500 flex flex-row justify-between items-start gap-12">
                 <div>
                     <div class="mr-4 md:flex mb-4">
-                        <img src="assets/img/cyberctf_logo.svg" alt="Cyber CTF Logo" class="w-12 h-12">
+                        <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white text-xl font-bold">💳</span>
+                        </div>
                     </div>
                     <div>Copyright &copy; <?php echo htmlspecialchars($site['copyright']); ?></div>
                     <div class="mt-2">All rights reserved</div>
@@ -194,21 +214,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // JavaScript pour la ChallengeToast
-        function toggleChallenge() {
-            const button = document.getElementById('challenge-toggle');
-            const details = document.getElementById('challenge-details');
-            
-            if (button.style.display === 'none') {
-                button.style.display = 'flex';
-                details.style.display = 'none';
-            } else {
-                button.style.display = 'none';
-                details.style.display = 'block';
-            }
-        }
-    </script>
 </body>
 </html> 
