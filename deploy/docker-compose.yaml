@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   php-app:
-    build: .
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
     ports:
       - "3206:80"
     volumes:
@@ -27,19 +29,6 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: unless-stopped
     command: --default-authentication-plugin=mysql_native_password
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8080:80"
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      PMA_USER: quickpay
-      PMA_PASSWORD: quickpay123
-    depends_on:
-      - mysql
-    restart: unless-stopped
 
 volumes:
   mysql_data: 

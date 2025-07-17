@@ -19,6 +19,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 
 # Enable Apache modules
 RUN a2enmod rewrite
+RUN a2enmod headers
 
 # Set working directory
 WORKDIR /var/www/html
